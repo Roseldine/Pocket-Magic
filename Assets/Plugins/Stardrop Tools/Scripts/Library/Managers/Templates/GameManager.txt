@@ -1,0 +1,123 @@
+
+using StardropTools;
+using StardropTools.FiniteStateMachine.EventFiniteStateMachine;
+
+public class GameManager : StardropTools.Singletons.SingletonManagerStateMachined<GameManager>
+{
+    [UnityEngine.SerializeField] UnityEngine.Transform parentManagers;
+    [UnityEngine.SerializeField] CoreManager[] managers;
+
+
+    #region Events
+    public static CoreEvent OnInitializeEnter { get; private set; }
+    public static CoreEvent OnInitializeUpdate { get; private set; }
+    public static CoreEvent OnInitializeExit { get; private set; }
+
+    public static CoreEvent OnIdleEnter { get; private set; }
+    public static CoreEvent OnIdleUpdate { get; private set; }
+    public static CoreEvent OnIdleExit { get; private set; }
+
+    public static CoreEvent OnPlayEnter { get; private set; }
+    public static CoreEvent OnPlayUpdate { get; private set; }
+    public static CoreEvent OnPlayExit { get; private set; }
+
+    public static CoreEvent OnFinishEnter { get; private set; }
+    public static CoreEvent OnFinishUpdate { get; private set; }
+    public static CoreEvent OnFinishExit { get; private set; }
+
+    public static CoreEvent OnPauseEnter { get; private set; }
+    public static CoreEvent OnPauseUpdate { get; private set; }
+    public static CoreEvent OnPauseExit { get; private set; }
+
+    #endregion // events
+
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SynceEvents();
+
+        LoopManager.OnUpdate.AddListener(eventStateMachine.UpdateStateMachine);
+
+        GetManagers();
+        InitializeManagers();
+        LateInitializeManagers();
+    }
+
+    public override void LateInitialize()
+    {
+        base.LateInitialize();
+        ChangeState(1); // change to idle
+    }
+
+    protected override void CreateStates()
+    {
+        var states = new EventState[5];
+
+        states[0] = new EventState(0, "Initialization");
+        states[1] = new EventState(1, "Idle");
+        states[2] = new EventState(2, "Play");
+        states[3] = new EventState(3, "Finish");
+        states[4] = new EventState(4, "Pause");
+
+        eventStateMachine.EventStateMachine = new EventStateMachine(states);
+    }
+
+    void SynceEvents()
+    {
+        if (IsInitialized)
+            return;
+
+        OnInitializeEnter = SyncEnter(0);
+        OnInitializeUpdate = SyncUpdate(0);
+        OnInitializeExit = SyncExit(0);
+
+        OnIdleEnter = SyncEnter(1);
+        OnIdleUpdate = SyncUpdate(1);
+        OnIdleExit = SyncExit(1);
+
+        OnPlayEnter = SyncEnter(2);
+        OnPlayUpdate = SyncUpdate(2);
+        OnPlayExit = SyncExit(2);
+
+        OnFinishEnter = SyncEnter(3);
+        OnFinishUpdate = SyncUpdate(3);
+        OnFinishExit = SyncExit(3);
+
+        OnPauseEnter = SyncEnter(4);
+        OnPauseUpdate = SyncUpdate(4);
+        OnPauseExit = SyncExit(4);
+    }
+
+    /// <summary>
+    /// 0-initialization, 1-idle, 2-play, 3-finish, 4-pause
+    /// </summary>
+    public override void ChangeState(int nextStateID)
+    {
+        if (IsInitialized && IsLateInitialized && nextStateID == 0)
+        {
+            Print("Game Manager is already Initialized");
+            return;
+        }
+
+        base.ChangeState(nextStateID);
+    }
+
+
+    void GetManagers()
+        => managers = GetItems<CoreManager>(parentManagers);
+
+    void InitializeManagers()
+    {
+        if (managers.Exists())
+            for (int i = 0; i < managers.Length; i++)
+                managers[i].Initialize();
+    }
+
+    void LateInitializeManagers()
+    {
+        if (managers.Exists())
+            for (int i = 0; i < managers.Length; i++)
+                managers[i].LateInitialize();
+    }
+}

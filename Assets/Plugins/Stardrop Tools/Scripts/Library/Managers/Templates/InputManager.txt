@@ -1,0 +1,61 @@
+
+using UnityEngine;
+
+public class InputManager : SingletonManager<InputManager>
+{
+    [Header("Input")]
+    [SerializeField] bool hasInput;
+    [Space]
+    [SerializeField] Vector2 inputStart;
+    [SerializeField] Vector2 inputEnd;
+    [SerializeField] Vector2 inputCurrent;
+    [SerializeField] float inputDistance;
+    [Space]
+    [SerializeField] float horizontal;
+    [SerializeField] float vertical;
+
+    public static readonly CustomEvent OnInputStart = new CustomEvent();
+    public static readonly CustomEvent OnInputEnd = new CustomEvent();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
+
+    public override void SubscribeToEvents()
+    {
+        base.SubscribeToEvents();
+    }
+
+    public void UserInput()
+    {
+        // Input start
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (hasInput == false)
+                hasInput = true;
+
+            inputStart = Input.mousePosition;
+            OnInputStart?.Invoke();
+        }
+
+        // continuous input
+        if (Input.GetMouseButton(0))
+        {
+            inputCurrent = Input.mousePosition;
+            inputDistance = Vector2.Distance(inputStart, inputCurrent);
+        }
+
+        // input end
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (hasInput == true)
+            {
+                inputEnd = inputCurrent;
+                hasInput = false;
+            }
+
+            OnInputEnd?.Invoke();
+        }
+    }
+}

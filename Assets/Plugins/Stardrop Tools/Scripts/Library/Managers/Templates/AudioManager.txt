@@ -1,0 +1,34 @@
+
+using UnityEngine;
+using StardropTools.Audio;
+
+public class AudioManager : StardropTools.Singletons.SingletonCoreManager<AudioManager>
+{
+    [Header("Audio Databases")]
+    [SerializeField] AudioSourceDB db_someAudio;
+
+    [Header("Ambience & Music")]
+    [SerializeField] AudioSourceClip music;
+    [SerializeField] AudioSourceClip ambience;
+
+    public void PlayOneShotAtSource(AudioSource source, AudioClip clip, float pitch = 1)
+    {
+        source.pitch = pitch;
+        source.PlayOneShot(clip);
+    }
+
+    public void PlayRandomFromDatabse(AudioSourceDB audioSourceDB)
+    {
+        PlayOneShotAtSource(audioSourceDB.Source, audioSourceDB.RandomClip);
+    }
+
+    public void PlayMusic() => music.Play();
+    public void PlayAmbience() => ambience.Play();
+
+    void PlaySomeAudio() => db_someAudio.PlayRandomOneShot(true);
+
+    /// <summary>
+    /// 0-something, 1-other, 2-another
+    /// </summary>
+    void PlaySomeAudioAtIndex(int index) => db_someAudio.PlayClipOneShotAtIndex(index, true);
+}

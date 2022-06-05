@@ -1,0 +1,17 @@
+
+using UnityEngine;
+using StardropTools.Pool;
+
+public class PoolManager : SingletonPoolManager<PoolManager>
+{
+    // Clusters:
+    // 0-rooms, 1-hands
+
+    /// <summary>
+    /// 0-room1, 1-room2
+    /// </summary>
+    public Room SpawnRoom(int roomIndex, Vector3 position, Transform parent)
+        => SpawnFromPoolCluster<Room>(0, roomIndex, position, Quaternion.identity, parent);
+
+    public void DespawnAllRooms() => DespawnEntireCluster(0);
+}

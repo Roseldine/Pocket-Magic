@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec78a60fb3b9b84999914b3cc94a56e, type: 3}
+  m_Name: Generic Button Sprite DBSO
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+  font: {fileID: 11400000, guid: 5147fc7fd37651140bc185152b7552b9, type: 2}
+  center:
+    background: {fileID: 21300000, guid: 87e361183ac59b14eb3b5ed41a0a47c4, type: 3}
+    gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+    shade: {fileID: 21300000, guid: 48a35bef768373d4a97f2acd0bea920e, type: 3}
+    outline: {fileID: 21300000, guid: 64041d5f19926954cb35bedb7eb450a7, type: 3}
+  top:
+    background: {fileID: 21300000, guid: 449fa42e5d9e2a743b547344a72481ce, type: 3}
+    gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+    shade: {fileID: 21300000, guid: 48a35bef768373d4a97f2acd0bea920e, type: 3}
+    outline: {fileID: 21300000, guid: 7d263b028bac57449baae78cb479436e, type: 3}
+  left:
+    background: {fileID: 21300000, guid: e26a5d5957676f24a92982e5f853c261, type: 3}
+    gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+    shade: {fileID: 21300000, guid: 06934e7ceb51a8d42a3e17ce3cf47569, type: 3}
+    outline: {fileID: 21300000, guid: f1f101c821562ba4293ebc00ac205f18, type: 3}
+  right:
+    background: {fileID: 21300000, guid: bda3fd7df08be9443a1c02b67041e772, type: 3}
+    gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+    shade: {fileID: 21300000, guid: 0049bc573b709b94aae36484d57b7164, type: 3}
+    outline: {fileID: 21300000, guid: d0140b293f6ad8b4f82c83397e151b80, type: 3}
+  bottom:
+    background: {fileID: 21300000, guid: 7f51931b7d652e14899f4ba66b0e9042, type: 3}
+    gradient: {fileID: 21300000, guid: 52306335ba077a04eae261f92b29dfd5, type: 3}
+    shade: {fileID: 21300000, guid: 37bee3a390ee9984f8f765f6542ee26a, type: 3}
+    outline: {fileID: 21300000, guid: df6611be385596f4f8ad59b15e319116, type: 3}

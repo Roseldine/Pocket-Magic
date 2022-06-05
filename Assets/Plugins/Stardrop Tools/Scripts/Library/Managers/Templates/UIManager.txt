@@ -1,0 +1,44 @@
+
+using UnityEngine;
+using StardropTools.UI;
+
+public class UIManager : StardropTools.Singletons.SingletonCoreManager<UIManager>
+{
+    [SerializeField] UIRootCanvas rootCanvas;
+    [SerializeField] UIMenu[] menus;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeToEvents();
+    }
+
+    public override void LateInitialize()
+    {
+        base.LateInitialize();
+
+        //rootCanvas.Initialize();
+        for (int i = 0; i < menus.Length; i++)
+            menus[i].Initialize();
+
+        ChangeMenu(0);
+    }
+
+    public override void SubscribeToEvents()
+    {
+        base.SubscribeToEvents();
+
+        GameManager.OnIdleEnter.AddListener(() => ChangeMenu(0));
+        GameManager.OnPlayEnter.AddListener(() => ChangeMenu(1));
+        GameManager.OnFinishEnter.AddListener(() => ChangeMenu(2));
+    }
+
+    public void ChangeMenu(int menuID)
+    {
+        for (int i = 0; i < menus.Length; i++)
+            menus[i].SetActive(false);
+
+        menus[menuID].SetActive(true);
+        menus[menuID].Open();
+    }
+}

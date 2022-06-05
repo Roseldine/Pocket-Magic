@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8310fdca14dcfc3488b2dae18af79de5, type: 3}
+  m_Name: Bolt
+  m_EditorClassIdentifier: 
+  spellTier: 0
+  spellName: Bolt
+  spellID: 0
+  damage: 0
+  spellPrefab: {fileID: 360299361762530046, guid: c73170cc7212cd14dbfdc57e8a7a2760,
+    type: 3}
+  spellPoints: 050000000000000003000000
+  reversedSpellPoints: 030000000000000005000000
+  reverse: 0
